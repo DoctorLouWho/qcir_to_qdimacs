@@ -1,0 +1,6 @@
+forall(2,3) #A,B
+exists(1) #C
+output(5)
+
+4 = and(2,3)
+5 = or(4,1)

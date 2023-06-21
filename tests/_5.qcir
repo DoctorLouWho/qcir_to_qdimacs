@@ -1,0 +1,10 @@
+forall(1,2,3,4)
+exists(10)
+output(9)
+# aaaaa
+#aedx
+5=and(1,2) #dtyjfgvfyg
+6=and(3,4)  #55e6
+7=or(5,6,3)
+8=and(2,3)
+9=and(7,8)

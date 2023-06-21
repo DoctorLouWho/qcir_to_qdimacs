@@ -1,0 +1,19 @@
+forall(1) #A
+exists(2,6,10,14) #B, X, X', X"
+output(3)
+# (A and B) and (not A and B)
+
+7 = or(-6,1)
+8 = or(-6,2)
+9 = or(6,-1,-2)
+4 = and(7,8,9) #4->6 (A and B <-> X)
+
+11 = or(-10,-1)
+12 = or(-10,2)
+13 = or(10,1,-2)
+5 = and(11,12,13) #5->10 (not A and B <-> X')
+
+15 = or(-14,6) #replace 4 by 6
+16 = or(-14,10) #replace 5 by 10
+17 = or(14,-6,-10)
+3 = and(15,16,17,4,5,14) 

@@ -1,0 +1,10 @@
+exists(1) #A
+forall(2) #B
+exists(3) #C
+output(6)
+
+# (A and B) and (-A and C)
+# now its (-A and C) or -B
+4 = and(1,2)
+5 = and(-1,3)
+6 = and(4,5)
