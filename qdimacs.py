@@ -22,8 +22,9 @@ def line_prepender(filename, line):
 class solve():
 
     def __init__(self, file_name):
+        self.out_name = file_name.replace('.qcir','-me.qdimacs')
         self.fp = open(file_name, 'r')
-        self.out_f = open('outi.qcir', 'w')
+        self.out_f = open(self.out_name, 'w')
         self.trans_vars = {}
         self.max = 0
         self.exist_list = []
@@ -84,14 +85,13 @@ class solve():
         
 
         if line_list[0] == 'exists':
-            #flush 
-            # self.exist_list = []
-            # self.exist_list += line_list[1:]
             self.print_list.append('e {} '.format(' '.join(line_list[1:])))
+            self.max = max(max([int(i) for i in line_list[1:]]),self.max)
 
         if line_list[0] == 'forall': 
             self.print_list.append('a {} '.format(' '.join(line_list[1:])))
-
+            self.max = max(max([int(i) for i in line_list[1:]]),self.max)
+            
         if 'and' in line_list:
             self.expand_and(line_list)
 
@@ -111,13 +111,10 @@ class solve():
 
             if line[0] == '#':
                 continue
-            
-            # # print(re.split('\W+', line, 0))
-            # print([i for i in re.split("[=(),\s]", line) if i])
 
             #find max num in line
-            new_max = max([int(i) for i in re.split('\W+', line, 0) if i.isnumeric()])
-            self.max = max(new_max, self.max)
+            # new_max = max([int(i) for i in re.split('\W+', line, 0) if i.isnumeric()])
+            # self.max = max(new_max, self.max)
 
                 
         self.fp.seek(0)
@@ -133,8 +130,8 @@ class solve():
         else:
             self.print_list.append('e {} 0'.format(' '.join(self.exist_list)))
 
-        line_prepender('outi.qcir', '0 \n'.join(self.print_list))
-        line_prepender('outi.qcir', 'p cnf {} {}'.format(self.exist_list[-1], len(self.init_var)*3+1))
+        line_prepender(self.out_name, '0 \n'.join(self.print_list))
+        line_prepender(self.out_name, 'p cnf {} {}'.format(self.exist_list[-1], len(self.init_var)*3+1))
 
         return
     
