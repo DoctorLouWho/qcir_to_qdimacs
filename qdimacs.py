@@ -7,6 +7,7 @@
 
 import re
 import sys
+import time
 
 orig_stdout = sys.stdout
 
@@ -139,13 +140,14 @@ class solve():
 def main():
     file_name = input("Please insert a file name: ")
     
+    t = time.time()
     # sys.stdout = f
 
     sil = solve(file_name)
     sil.file_reader()
 
     sys.stdout = orig_stdout
-    
+    print(time.time()-t)
     # f.close()
     
 if __name__ == "__main__": 
